@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "label"
+    },
+    {
+      "name": "Enter_PIN",
+      "value": "Enter PIN to log-in to the app"
+    },
+    {
+      "name": "Set_PIN",
+      "value": "Set PIN"
+    },
+    {
+      "name": "Check_PIN",
+      "value": "Type PIN again"
     }
   ]
 }

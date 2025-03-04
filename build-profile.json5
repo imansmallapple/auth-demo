@@ -1,6 +1,19 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:/Users/chens/.ohos/config/openharmony/default_auth-demo_iTQsloTMsos8qLKHxxQACsmksi1Oh8IBNznpiuyNah0=.cer",
+          "storePassword": "0000001B2681F19C8EBDE6BCAF02051B211BB6641BA92DFEA61178C1A97BE4473DB115ACBC7D384F2BA7AA",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B6E81CBAC8F2E90C2D690C4C9A62AC5EED8EB6BB3A10C8159C5C9368ABB91A32EE59F856E45EFE9",
+          "profile": "C:/Users/chens/.ohos/config/openharmony/default_auth-demo_iTQsloTMsos8qLKHxxQACsmksi1Oh8IBNznpiuyNah0=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:/Users/chens/.ohos/config/openharmony/default_auth-demo_iTQsloTMsos8qLKHxxQACsmksi1Oh8IBNznpiuyNah0=.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",

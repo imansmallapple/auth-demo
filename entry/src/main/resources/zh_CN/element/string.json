@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "label"
+    },
+    {
+      "name": "Enter_PIN",
+      "value": "输入PIN码登陆"
+    },
+    {
+      "name": "Set_PIN",
+      "value": "设置PIN"
+    },
+    {
+      "name": "Check_PIN",
+      "value": "再输入一次PIN"
     }
   ]
 }

@@ -1,7 +1,7 @@
 @Entry
 @Component
-struct Index {
-  @State message: string = 'Hello World';
+struct Login {
+  @State message: string = 'Login with account';
 
   build() {
     Row() {
