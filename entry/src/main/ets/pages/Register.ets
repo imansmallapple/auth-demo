@@ -1,5 +1,5 @@
 import router from '@ohos.router'
-import { AccountManager } from '../method/account'
+import { AccountManager } from '../viewModel/account'
 import common from '@ohos.app.ability.common';
 import Log from '../utils/Log';
 import promptAction from '@ohos.promptAction';

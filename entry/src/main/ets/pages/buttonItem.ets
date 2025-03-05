@@ -2,6 +2,7 @@ import Storage from '../storage/Storage'
 import Log from '../utils/Log'
 import router from '@ohos.router'
 import promptAction from '@ohos.promptAction'
+import { popToastInfo } from '../utils/infoUtil'
 
 @Component
 export default struct buttonItem {
@@ -15,7 +16,6 @@ export default struct buttonItem {
   @Consume isTypedMax: boolean
   @Consume isRegisterPIN: boolean
   @Consume isForLogin: boolean
-  @State isPINInvalid: boolean = false
   private localStorage = new Storage()
   @State savedPIN: string = ''
   private maxTry: number = 3
@@ -28,6 +28,12 @@ export default struct buttonItem {
   async registerPIN(newPIN: string) {
     this.savedPIN = newPIN
     await this.localStorage.putValue('pin', newPIN)
+    this.localStorage.flushAllData()
+  }
+
+  async clearPIN() {
+    this.savedPIN = ''
+    await this.localStorage.putValue('pin', '')
     this.localStorage.flushAllData()
   }
 
@@ -76,32 +82,25 @@ export default struct buttonItem {
       }
       else if (this.isTypedMax && this.isForLogin) {
         let res = await this.checkPIN()
-        // Log.info('check pin(can be logged in):', res)
         if (res == true) {
 
-          promptAction.showToast({
-            message: 'Logged in!'
-          })
+          popToastInfo('Logged in!')
 
           router.pushUrl({
             url: 'pages/Index'
           })
         } else {
-          this.isPINInvalid = false
-          // clear input until tried 3 times
           this.result = ''
-          promptAction.showToast({
-            message: `Incorrect! You left ${this.maxTry > 0 ? --this.maxTry : this.maxTry = 0} times left to try!`
-          })
+          popToastInfo(`Incorrect! You left ${this.maxTry > 0 ? --this.maxTry : this.maxTry = 0} times left to try!`)
 
           if (this.maxTry == 0) {
-            this.isPINInvalid = true
-            Log.info('check login button', this.isPINInvalid)
-            router.pushUrl({
+
+            await this.clearPIN()
+
+            popToastInfo('PIN expired! Please log with your credential')
+
+            router.replaceUrl({
               url: 'pages/Login',
-              params: {
-                isPINInvalid: this.isPINInvalid
-              }
             })
           }
         }

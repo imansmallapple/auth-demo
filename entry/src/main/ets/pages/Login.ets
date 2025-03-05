@@ -1,9 +1,9 @@
 import router from '@ohos.router'
-import { AccountManager } from '../method/account'
+import { AccountManager } from '../viewModel/account'
 import common from '@ohos.app.ability.common';
-import promptAction from '@ohos.promptAction';
 import Storage from '../storage/Storage'
 import Log from '../utils/Log';
+import { displayAlertWindow, popToastInfo } from '../utils/infoUtil';
 
 interface RouterParams {
   isPINInvalid: boolean
@@ -23,25 +23,13 @@ struct Login {
   @State savedPwd: string = ''
   @State credential: string[] = []
   @State savedPIN: string = ''
-  //PIN
-  @State isPINInvalid: boolean = false
 
   async aboutToAppear(): Promise<void> {
     let savedPIN: string = (await this.localStorage.getValue('pin') as string)
     this.savedPIN = (savedPIN == null ? '' : savedPIN)
-    Log.info('check login ', 'atb')
+    Log.info('check login saved pin:', this.savedPIN)
 
-    let res: RouterParams
-    try {
-      res = router.getParams() as RouterParams;
-      this.isPINInvalid = res?.isPINInvalid || false; // 如果没有参数，默认 `isPINInvalid = false`
-      Log.info('check login ', res)
-    } catch (error) {
-      Log.warn('check login ', 'No parameters received, using defaults.');
-    }
-
-    Log.info('check login ', this.isPINInvalid)
-    if (this.savedPIN.length == 6 && !this.isPINInvalid) {
+    if (this.savedPIN.length == 6) {
       router.replaceUrl({
         url: 'pages/PINLogin'
       })
@@ -98,7 +86,7 @@ struct Login {
         }.margin({ top: 30 })
 
         Divider()
-          .color(Color.Black)// .margin({ right: 120 })
+          .color(Color.Black)
           .strokeWidth(1)
 
         Button('Login')
@@ -112,25 +100,24 @@ struct Login {
             //to do: login
             let res = await this.accountManager.login(this.email, this.password)
             if (res == true) {
-
-              // todo: Save user credentials into preferences
-              this.credential.push(this.email)
-              this.credential.push(this.password)
-              this.localStorage.setStyle('credential', this.credential)
-
-              promptAction.showToast({
-                message: "Login succeed!"
-              })
-              router.pushUrl({
-                url: 'pages/Index',
-                params: {
-                  email: this.email
+              displayAlertWindow('Set PIN',
+                'Do you want set PIN for this app?',
+                'Yes',
+                'No',
+                () => {
+                  router.replaceUrl({
+                    url: 'pages/SetPIN'
+                  })
+                },
+                () => {
+                  popToastInfo('Login successful!')
+                  router.pushUrl({
+                    url: 'pages/Index'
+                  })
                 }
-              })
+              )
             } else {
-              promptAction.showToast({
-                message: "Wrong email or password!"
-              })
+              popToastInfo('Wrong email or password!')
             }
           })
       }
