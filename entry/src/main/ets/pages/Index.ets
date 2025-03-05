@@ -1,3 +1,6 @@
+import common from '@ohos.app.ability.common';
+let context = getContext(this) as common.UIAbilityContext;
+
 @Entry
 @Component
 struct Index {

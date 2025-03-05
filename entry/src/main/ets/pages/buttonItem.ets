@@ -15,21 +15,24 @@ export default struct buttonItem {
   @Consume isTypedMax: boolean
   @Consume isRegisterPIN: boolean
   @Consume isForLogin: boolean
+  @State isPINInvalid: boolean = false
   private localStorage = new Storage()
   @State savedPIN: string = ''
   private maxTry: number = 3
 
   async aboutToAppear(): Promise<void> {
-    let temp: string = (await this.localStorage.getValue('pin') as string)
-    this.savedPIN = temp
+    let savedPIN: string = (await this.localStorage.getValue('pin') as string)
+    this.savedPIN = (savedPIN == null ? '' : savedPIN)
   }
 
   async registerPIN(newPIN: string) {
     this.savedPIN = newPIN
     await this.localStorage.putValue('pin', newPIN)
+    this.localStorage.flushAllData()
   }
 
   async checkPIN() {
+    Log.info('check pin', `result: ${this.result}`, `savedPIN: ${this.savedPIN}`)
     return this.result == this.savedPIN
   }
 
@@ -67,7 +70,7 @@ export default struct buttonItem {
           message: 'PIN registered!'
         })
 
-        router.pushUrl({
+        router.replaceUrl({
           url: 'pages/PINLogin'
         })
       }
@@ -84,15 +87,21 @@ export default struct buttonItem {
             url: 'pages/Index'
           })
         } else {
+          this.isPINInvalid = false
           // clear input until tried 3 times
           this.result = ''
           promptAction.showToast({
             message: `Incorrect! You left ${this.maxTry > 0 ? --this.maxTry : this.maxTry = 0} times left to try!`
           })
 
-          if(this.maxTry == 0){
+          if (this.maxTry == 0) {
+            this.isPINInvalid = true
+            Log.info('check login button', this.isPINInvalid)
             router.pushUrl({
-              url: 'pages/Login'
+              url: 'pages/Login',
+              params: {
+                isPINInvalid: this.isPINInvalid
+              }
             })
           }
         }

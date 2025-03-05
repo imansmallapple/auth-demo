@@ -3,6 +3,7 @@
     "pages/PINLogin",
     "pages/Index",
     "pages/SetPIN",
-    "pages/Login"
+    "pages/Login",
+    "pages/Register"
   ]
 }
