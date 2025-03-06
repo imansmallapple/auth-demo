@@ -23,6 +23,106 @@
     {
       "name": "Check_PIN",
       "value": "再输入一次PIN"
+    },
+    {
+      "name": "USER_LOGIN",
+      "value": "你已登陆"
+    },
+    {
+      "name": "LOGOUT",
+      "value": "登出"
+    },
+    {
+      "name": "LOGIN",
+      "value": "登陆"
+    },
+    {
+      "name": "LOGOUT_QUERY",
+      "value": "确定登出？（PIN会失效）"
+    },
+    {
+      "name": "CANCEL",
+      "value": "取消"
+    },
+    {
+      "name": "PIN_REGISTERED",
+      "value": "PIN已注册!"
+    },
+    {
+      "name": "LOGGED_IN",
+      "value": "已登陆!"
+    },
+    {
+      "name": "PIN_EXPIRED",
+      "value": "PIN过期！请用账号登陆"
+    },
+    {
+      "name": "WELCOME_LOGIN",
+      "value": "欢迎登陆"
+    },
+    {
+      "name": "EMAIL",
+      "value": "邮箱"
+    },
+    {
+      "name": "PASSWORD",
+      "value": "密码"
+    },
+    {
+      "name": "SET_PIN_QUERY",
+      "value": "你想设置PIN吗？"
+    },
+    {
+      "name": "YES",
+      "value": "确定"
+    },
+    {
+      "name": "NO",
+      "value": "取消"
+    },
+    {
+      "name": "LOGIN_SUCCESS",
+      "value": "登陆成功!"
+    },
+    {
+      "name": "REGISTRATION_SUCCESS",
+      "value": "注册成功!"
+    },
+    {
+      "name": "WRONG_CREDENTIAL",
+      "value": "错误邮箱或者密码!"
+    },
+    {
+      "name": "REGISTER_QUERY",
+      "value": "还没有账号？点击注册!"
+    },
+    {
+      "name": "REGISTRATION",
+      "value": "注册"
+    },
+    {
+      "name": "USERNAME",
+      "value": "用户名"
+    },
+    {
+      "name": "USER_EXIST",
+      "value": "用户已存在!"
+    },
+    {
+      "name": "REPEAT_PASSWORD",
+      "value": "重复密码"
+    },
+    {
+      "name": "REGISTRATION_RULE",
+      "value": "用户名至少6个字符，邮箱至少6个字符，必须包含@和.com类后缀\n 密码至少8个字符长，至少包含一个大写字母，一个小写字母和一个数字"
+    },
+    {
+      "name": "REGISTER",
+      "value": "注册"
+    },
+    {
+      "name": "INVALID_INPUT",
+      "value": "数据非法!"
     }
   ]
 }

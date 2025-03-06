@@ -4,6 +4,8 @@ import common from '@ohos.app.ability.common';
 import Storage from '../storage/Storage'
 import Log from '../utils/Log';
 import { displayAlertWindow, popToastInfo } from '../utils/infoUtil';
+import { resourceToStr } from '../utils/stringUtil';
+import Constants from '../constants/constant';
 
 interface RouterParams {
   isPINInvalid: boolean
@@ -23,13 +25,16 @@ struct Login {
   @State savedPwd: string = ''
   @State credential: string[] = []
   @State savedPIN: string = ''
+  private context = getContext(this) as common.UIAbilityContext
+  private maxPINLen: number = Constants.MAX_PIN_LENGTH
+
 
   async aboutToAppear(): Promise<void> {
     let savedPIN: string = (await this.localStorage.getValue('pin') as string)
     this.savedPIN = (savedPIN == null ? '' : savedPIN)
     Log.info('check login saved pin:', this.savedPIN)
 
-    if (this.savedPIN.length == 6) {
+    if (this.savedPIN.length == this.maxPINLen) {
       router.replaceUrl({
         url: 'pages/PINLogin'
       })
@@ -56,13 +61,13 @@ struct Login {
       .height('20%')
 
       Column() {
-        Text('Welcome Login')
+        Text(resourceToStr(this.context, $r('app.string.WELCOME_LOGIN')))
           .titleStyle()
 
         Row() {
           Image($r('app.media.icon_user'))
             .iconStyle()
-          TextInput({ placeholder: 'email' })
+          TextInput({ placeholder: resourceToStr(this.context, $r('app.string.EMAIL')) })
             .inputStyle()
             .type(InputType.Email)
             .onChange((value) => {
@@ -77,7 +82,7 @@ struct Login {
         Row() {
           Image($r('app.media.icon_security'))
             .iconStyle()
-          TextInput({ placeholder: 'password' })
+          TextInput({ placeholder: resourceToStr(this.context, $r('app.string.PASSWORD')) })
             .inputStyle()
             .type(InputType.Password)
             .onChange((value) => {
@@ -89,7 +94,7 @@ struct Login {
           .color(Color.Black)
           .strokeWidth(1)
 
-        Button('Login')
+        Button(resourceToStr(this.context, $r('app.string.LOGIN')))
           ._buttonStyle(
             Color.Black,
             Color.White
@@ -100,24 +105,24 @@ struct Login {
             //to do: login
             let res = await this.accountManager.login(this.email, this.password)
             if (res == true) {
-              displayAlertWindow('Set PIN',
-                'Do you want set PIN for this app?',
-                'Yes',
-                'No',
+              displayAlertWindow(resourceToStr(this.context, $r('app.string.Set_PIN')),
+                resourceToStr(this.context, $r('app.string.SET_PIN_QUERY')),
+                resourceToStr(this.context, $r('app.string.YES')),
+                resourceToStr(this.context, $r('app.string.NO')),
                 () => {
                   router.replaceUrl({
                     url: 'pages/SetPIN'
                   })
                 },
                 () => {
-                  popToastInfo('Login successful!')
+                  popToastInfo(resourceToStr(this.context, $r('app.string.LOGIN_SUCCESS')))
                   router.pushUrl({
                     url: 'pages/Index'
                   })
                 }
               )
             } else {
-              popToastInfo('Wrong email or password!')
+              popToastInfo(resourceToStr(this.context, $r('app.string.WRONG_CREDENTIAL')))
             }
           })
       }
@@ -126,7 +131,7 @@ struct Login {
       .formBgStyle()
 
       Row() {
-        Text('Don\'t have account? Register now!')
+        Text(resourceToStr(this.context, $r('app.string.REGISTER_QUERY')))
           .fontSize(15)
           .fontWeight(500)
           .fontColor(Color.Blue)

@@ -3,13 +3,17 @@ import Log from '../utils/Log'
 import router from '@ohos.router'
 import promptAction from '@ohos.promptAction'
 import { popToastInfo } from '../utils/infoUtil'
+import { resourceToStr } from '../utils/stringUtil'
+import common from '@ohos.app.ability.common'
+import Constants from '../constants/constant'
 
 @Component
 export default struct buttonItem {
   private content!: string
+  private context = getContext(this) as common.UIAbilityContext
   //touch color
-  tapColor: string = '#666666'
-  defaultColor: string = '#ffffffff'
+  tapColor: string = resourceToStr(this.context, $r('app.color.TAP'))
+  defaultColor: string = resourceToStr(this.context, $r('app.color.DEFAULT'))
   @State buttonBgColor: string = ''
   @Consume result: string
   @Consume textCaretPosition: number
@@ -18,7 +22,8 @@ export default struct buttonItem {
   @Consume isForLogin: boolean
   private localStorage = new Storage()
   @State savedPIN: string = ''
-  private maxTry: number = 3
+  private maxTry: number = Constants.MAX_TRY
+  private maxPINLen: number = Constants.MAX_PIN_LENGTH
 
   async aboutToAppear(): Promise<void> {
     let savedPIN: string = (await this.localStorage.getValue('pin') as string)
@@ -56,12 +61,12 @@ export default struct buttonItem {
     .borderWidth(1)
     .width('100%')
     .onClick(async () => {
-      if (this.result.length < 6) {
+      if (this.result.length < this.maxPINLen) {
         this.result += this.content
         this.textCaretPosition++
       }
 
-      if (this.result.length < 6) {
+      if (this.result.length < this.maxPINLen) {
         this.isTypedMax = false
       }
       else {
@@ -73,7 +78,7 @@ export default struct buttonItem {
         this.registerPIN(this.result)
 
         promptAction.showToast({
-          message: 'PIN registered!'
+          message: resourceToStr(this.context, $r('app.string.PIN_REGISTERED'))
         })
 
         router.replaceUrl({
@@ -84,7 +89,7 @@ export default struct buttonItem {
         let res = await this.checkPIN()
         if (res == true) {
 
-          popToastInfo('Logged in!')
+          popToastInfo(resourceToStr(this.context, $r('app.string.LOGGED_IN')))
 
           router.pushUrl({
             url: 'pages/Index'
@@ -97,7 +102,7 @@ export default struct buttonItem {
 
             await this.clearPIN()
 
-            popToastInfo('PIN expired! Please log with your credential')
+            popToastInfo(resourceToStr(this.context, $r('app.string.PIN_EXPIRED')))
 
             router.replaceUrl({
               url: 'pages/Login',

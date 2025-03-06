@@ -1,13 +1,16 @@
 import buttonItem from './buttonItem'
+import common from '@ohos.app.ability.common'
+import { resourceToStr } from '../utils/stringUtil'
 
 @Component
 export default struct Keyboard {
   private keyboardArray: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+  private context = getContext(this) as common.UIAbilityContext
   @Consume result: string
   @Consume textCaretPosition: number
   //touch color
-  tapColor: string = '#666666'
-  defaultColor: string = '#ffffffff'
+  tapColor: string = resourceToStr(this.context, $r('app.color.TAP'))
+  defaultColor: string = resourceToStr(this.context, $r('app.color.DEFAULT'))
   @State buttonBgColor: string = ''
 
   deleteNumber() {

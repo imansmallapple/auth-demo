@@ -23,6 +23,106 @@
     {
       "name": "Check_PIN",
       "value": "Type PIN again"
+    },
+    {
+      "name": "USER_LOGIN",
+      "value": "You logged in"
+    },
+    {
+      "name": "LOGOUT",
+      "value": "Logout"
+    },
+    {
+      "name": "LOGIN",
+      "value": "Login"
+    },
+    {
+      "name": "LOGOUT_QUERY",
+      "value": "Are you sure to logout?(PIN will be invalid)"
+    },
+    {
+      "name": "CANCEL",
+      "value": "Cancel"
+    },
+    {
+      "name": "PIN_REGISTERED",
+      "value": "PIN Registered!"
+    },
+    {
+      "name": "LOGGED_IN",
+      "value": "Logged in!"
+    },
+    {
+      "name": "PIN_EXPIRED",
+      "value": "PIN expired! Please log with your credential"
+    },
+    {
+      "name": "WELCOME_LOGIN",
+      "value": "Welcome Login"
+    },
+    {
+      "name": "EMAIL",
+      "value": "email"
+    },
+    {
+      "name": "PASSWORD",
+      "value": "password"
+    },
+    {
+      "name": "SET_PIN_QUERY",
+      "value": "Do you want set PIN for this app?"
+    },
+    {
+      "name": "YES",
+      "value": "Yes"
+    },
+    {
+      "name": "NO",
+      "value": "No"
+    },
+    {
+      "name": "LOGIN_SUCCESS",
+      "value": "Login successful!"
+    },
+    {
+      "name": "REGISTRATION_SUCCESS",
+      "value": "Registration successful!"
+    },
+    {
+      "name": "WRONG_CREDENTIAL",
+      "value": "Wrong email or password!"
+    },
+    {
+      "name": "REGISTER_QUERY",
+      "value": "Don\\'t have account? Register now!"
+    },
+    {
+      "name": "REGISTRATION",
+      "value": "Registration"
+    },
+    {
+      "name": "USERNAME",
+      "value": "username"
+    },
+    {
+      "name": "USER_EXIST",
+      "value": "User exist!"
+    },
+    {
+      "name": "REPEAT_PASSWORD",
+      "value": "repeat password"
+    },
+    {
+      "name": "REGISTRATION_RULE",
+      "value": "Username at least 6 letters long, email at least 6 letters long and must have @ and .com like ending\n Password at least 8 letters long and must have capital and small letters and numbers"
+    },
+    {
+      "name": "REGISTER",
+      "value": "Register"
+    },
+    {
+      "name": "INVALID_INPUT",
+      "value": "Input data invalid!"
     }
   ]
 }

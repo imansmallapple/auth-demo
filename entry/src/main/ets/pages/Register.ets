@@ -3,6 +3,7 @@ import { AccountManager } from '../viewModel/account'
 import common from '@ohos.app.ability.common';
 import Log from '../utils/Log';
 import promptAction from '@ohos.promptAction';
+import { resourceToStr } from '../utils/stringUtil';
 
 let context = getContext(this) as common.UIAbilityContext;
 
@@ -16,16 +17,10 @@ struct Register {
   @State isUserExist: boolean = false
   private accountManager: AccountManager = new AccountManager(context)
   @State isInputDataLegal: boolean = true
+  private context = getContext(this) as common.UIAbilityContext
 
   build() {
     Column({ space: 50 }) {
-      // Image($r('app.media.icon_back'))
-      //   .width(25)
-      //   .height(25)
-      //   .alignSelf(ItemAlign.Start)
-      //   .onClick(() => {
-      //     router.back()
-      //   })
       Column() {
         Row({ space: 20 }) {
           Image($r('app.media.startIcon'))
@@ -43,7 +38,7 @@ struct Register {
       .height('20%')
 
       Column() {
-        Text('Registration')
+        Text(resourceToStr(this.context, $r('app.string.REGISTRATION')))
           .fontSize(22)
           .alignSelf(ItemAlign.Center)
           .fontWeight(700)
@@ -52,7 +47,7 @@ struct Register {
           Image($r('app.media.icon_user'))
             .width(25)
             .height(25)
-          TextInput({ placeholder: 'username' })
+          TextInput({ placeholder: resourceToStr(this.context, $r('app.string.USERNAME')) })
             .height(40)
             .backgroundColor(Color.Transparent)
             .fontSize(14)
@@ -67,7 +62,7 @@ struct Register {
           .color(Color.Black)
           .strokeWidth(1)
         if (this.isUserExist) {
-          Text("User exist!")
+          Text(resourceToStr(this.context, $r('app.string.USER_EXIST')))
             .fontColor(Color.Red)
         }
 
@@ -75,7 +70,7 @@ struct Register {
           Image($r('app.media.icon_email'))
             .width(25)
             .height(25)
-          TextInput({ placeholder: 'email' })
+          TextInput({ placeholder: resourceToStr(this.context, $r('app.string.EMAIL')) })
             .height(40)
             .backgroundColor(Color.Transparent)
             .fontSize(14)
@@ -96,7 +91,7 @@ struct Register {
           Image($r('app.media.icon_security'))
             .width(25)
             .height(25)
-          TextInput({ placeholder: 'password' })
+          TextInput({ placeholder: resourceToStr(this.context, $r('app.string.PASSWORD')) })
             .height(40)
             .backgroundColor(Color.Transparent)
             .fontSize(14)
@@ -114,7 +109,7 @@ struct Register {
           Image($r('app.media.icon_security'))
             .width(25)
             .height(25)
-          TextInput({ placeholder: 'repeat password' })
+          TextInput({ placeholder: resourceToStr(this.context, $r('app.string.REPEAT_PASSWORD')) })
             .height(40)
             .backgroundColor(Color.Transparent)
             .fontSize(14)
@@ -131,13 +126,12 @@ struct Register {
           .strokeWidth(1)
         if (!this.isInputDataLegal) {
           Column() {
-            Text('Username at least 6 letters long, email at least 6 letters long and must have @ and .com like ending, ' +
-              'password at least 8 letters long and must have capital and small letters and numbers')
+            Text(resourceToStr(this.context, $r('app.string.REGISTRATION_RULE')))
               .fontColor(Color.Red)
           }
         }
 
-        Button('Register')
+        Button(resourceToStr(this.context, $r('app.string.REGISTER')))
           .fontColor(Color.White)
           .backgroundColor(Color.Black)
           .height('5%')
@@ -159,7 +153,7 @@ struct Register {
 
               if (isRegistered == true) {
                 promptAction.showToast({
-                  message: "Registration succeed!"
+                  message: resourceToStr(this.context, $r('app.string.REGISTRATION_SUCCESS'))
                 })
                 router.pushUrl({
                   url: 'pages/SetPIN'
@@ -167,7 +161,7 @@ struct Register {
               }
             } else {
               promptAction.showToast({
-                message: "Input data invalid!"
+                message: resourceToStr(this.context, $r('app.string.INVALID_INPUT'))
               })
             }
           })

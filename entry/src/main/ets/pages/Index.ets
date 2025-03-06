@@ -1,12 +1,15 @@
 import router from '@ohos.router';
 import Storage from '../storage/Storage'
 import { displayAlertWindow } from '../utils/infoUtil';
+import common from '@ohos.app.ability.common';
+import { resourceToStr } from '../utils/stringUtil';
 
 @Entry
 @Component
 struct Index {
-  @State message: string = 'You logged in!';
+  @State message: string = 'You logged in!'
   private localStorage = new Storage()
+  private context = getContext(this) as common.UIAbilityContext
 
   async resetPIN() {
     await this.localStorage.putValue('pin', '')
@@ -20,13 +23,13 @@ struct Index {
           .fontSize(50)
           .fontWeight(FontWeight.Bold)
 
-        Button('Log out')
+        Button($r('app.string.LOGOUT'))
           .onClick(() => {
             displayAlertWindow(
-              'Logout',
-              "Are you sure to logout?(PIN will be invalid)",
-              'Logout',
-              'Cancel',
+              resourceToStr(this.context, $r('app.string.LOGOUT')),
+              resourceToStr(this.context, $r('app.string.LOGOUT_QUERY')),
+              resourceToStr(this.context, $r('app.string.LOGOUT')),
+              resourceToStr(this.context, $r('app.string.CANCEL')),
               async () => {
                 await this.resetPIN()
                 router.replaceUrl({

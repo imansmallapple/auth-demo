@@ -2,11 +2,14 @@ import Keyboard from './Keyboard'
 import systemDateTime from '@ohos.systemDateTime'
 import curves from '@ohos.curves'
 import Log from '../utils/Log'
+import { resourceToStr } from '../utils/stringUtil'
+import common from '@ohos.app.ability.common'
+import Constants from '../constants/constant'
 
 @Component
 export default struct PinCode {
   @Consume result: string
-  private pinLen: number = 6
+  private pinLen: number = Constants.MAX_PIN_LENGTH
   private controller: TextInputController = new TextInputController();
   @Prop enableKeyboardOnFocus: boolean = true
   @Consume textCaretPosition: number
@@ -15,11 +18,7 @@ export default struct PinCode {
   @State safeAreaPadding?: Padding | Length = undefined
   @State isCaretOpacity: boolean = false
   @Link title: string
-
-  // aboutToAppear(): void {
-  //   this.viewId = `${systemDateTime.getTime()}`
-  //   Log.info('viewId', this.viewId)
-  // }
+  private context = getContext(this) as common.UIAbilityContext
 
   setCaretOpacity() {
     this.isCaretOpacity = !this.isCaretOpacity
@@ -51,7 +50,7 @@ export default struct PinCode {
         .borderWidth(1)
         .width(1)
         .height(20)
-        .backgroundColor('#60999999')
+        .backgroundColor(resourceToStr(this.context, $r('app.color.PINCODE_BACKGROUND')))
 
       // Number instance
       Flex({
