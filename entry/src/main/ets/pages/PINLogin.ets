@@ -1,4 +1,4 @@
-import PinCode from './PinCode'
+import PinCode from '../components/PinCode'
 
 @Entry
 @Component

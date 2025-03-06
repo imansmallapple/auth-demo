@@ -114,7 +114,7 @@
     },
     {
       "name": "REGISTRATION_RULE",
-      "value": "Username at least 6 letters long, email at least 6 letters long and must have @ and .com like ending\n Password at least 8 letters long and must have capital and small letters and numbers"
+      "value": "Username at least 6 letters long\n Email at least 6 letters long and must have @ and .com like ending\n Password at least 8 letters long and must have capital and small letters and numbers"
     },
     {
       "name": "REGISTER",

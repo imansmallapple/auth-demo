@@ -1,4 +1,4 @@
-import PinCode from './PinCode'
+import PinCode from '../components/PinCode'
 
 //todo: PIN code with be set when user register an new account
 //todo: It will be invalid when user logout or reset PIN manually

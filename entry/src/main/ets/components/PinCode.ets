@@ -2,8 +2,6 @@ import Keyboard from './Keyboard'
 import systemDateTime from '@ohos.systemDateTime'
 import curves from '@ohos.curves'
 import Log from '../utils/Log'
-import { resourceToStr } from '../utils/stringUtil'
-import common from '@ohos.app.ability.common'
 import Constants from '../constants/constant'
 
 @Component
@@ -18,7 +16,6 @@ export default struct PinCode {
   @State safeAreaPadding?: Padding | Length = undefined
   @State isCaretOpacity: boolean = false
   @Link title: string
-  private context = getContext(this) as common.UIAbilityContext
 
   setCaretOpacity() {
     this.isCaretOpacity = !this.isCaretOpacity

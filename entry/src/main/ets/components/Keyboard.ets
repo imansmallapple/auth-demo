@@ -1,12 +1,9 @@
 import buttonItem from './buttonItem'
-import common from '@ohos.app.ability.common'
-import { resourceToStr } from '../utils/stringUtil'
 import Constants from '../constants/constant'
 
 @Component
 export default struct Keyboard {
   private keyboardArray: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-  private context = getContext(this) as common.UIAbilityContext
   @Consume result: string
   @Consume textCaretPosition: number
   //touch color
@@ -33,7 +30,6 @@ export default struct Keyboard {
             GridItem() {
               buttonItem({
                 content: item,
-                // result: $result
               })
             }
           })
