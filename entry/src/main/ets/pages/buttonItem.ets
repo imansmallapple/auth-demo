@@ -12,8 +12,8 @@ export default struct buttonItem {
   private content!: string
   private context = getContext(this) as common.UIAbilityContext
   //touch color
-  tapColor: string = resourceToStr(this.context, $r('app.color.TAP'))
-  defaultColor: string = resourceToStr(this.context, $r('app.color.DEFAULT'))
+  tapColor: string = Constants.TAP_COLOR
+  defaultColor: string = Constants.DEFAULT_COLOR
   @State buttonBgColor: string = ''
   @Consume result: string
   @Consume textCaretPosition: number

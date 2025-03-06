@@ -3,18 +3,6 @@
     {
       "name": "start_window_background",
       "value": "#FFFFFF"
-    },
-    {
-      "name": "TAP",
-      "value": "#666666"
-    },
-    {
-      "name": "DEFAULT",
-      "value": "#ffffffff"
-    },
-    {
-      "name": "PINCODE_BACKGROUND",
-      "value": "#60999999"
     }
   ]
 }

@@ -50,7 +50,7 @@ export default struct PinCode {
         .borderWidth(1)
         .width(1)
         .height(20)
-        .backgroundColor(resourceToStr(this.context, $r('app.color.PINCODE_BACKGROUND')))
+        .backgroundColor(Constants.PINCODE_BACKGROUND)
 
       // Number instance
       Flex({

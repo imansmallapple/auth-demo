@@ -1,6 +1,7 @@
 import buttonItem from './buttonItem'
 import common from '@ohos.app.ability.common'
 import { resourceToStr } from '../utils/stringUtil'
+import Constants from '../constants/constant'
 
 @Component
 export default struct Keyboard {
@@ -9,8 +10,8 @@ export default struct Keyboard {
   @Consume result: string
   @Consume textCaretPosition: number
   //touch color
-  tapColor: string = resourceToStr(this.context, $r('app.color.TAP'))
-  defaultColor: string = resourceToStr(this.context, $r('app.color.DEFAULT'))
+  tapColor: string = Constants.TAP_COLOR
+  defaultColor: string = Constants.DEFAULT_COLOR
   @State buttonBgColor: string = ''
 
   deleteNumber() {
