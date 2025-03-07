@@ -58,6 +58,8 @@ export default struct Keyboard {
         .gridStyle()
         .height(240)
       }
+      .width('100%')
+      .justifyContent(FlexAlign.Center)
     }
   }
 }

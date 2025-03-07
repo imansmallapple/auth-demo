@@ -155,7 +155,7 @@ struct Register {
                 promptAction.showToast({
                   message: resourceToStr(this.context, $r('app.string.REGISTRATION_SUCCESS'))
                 })
-                router.pushUrl({
+                router.replaceUrl({
                   url: 'pages/SetPIN'
                 })
               }

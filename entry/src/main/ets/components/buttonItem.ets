@@ -20,6 +20,7 @@ export default struct buttonItem {
   @Consume isTypedMax: boolean
   @Consume isRegisterPIN: boolean
   @Consume isForLogin: boolean
+  @Consume isAuthCorrect: boolean
   private localStorage = new Storage()
   @State savedPIN: string = ''
   private maxTry: number = Constants.MAX_TRY
@@ -88,12 +89,14 @@ export default struct buttonItem {
       else if (this.isTypedMax && this.isForLogin) {
         let res = await this.checkPIN()
         if (res == true) {
+          this.isAuthCorrect = true
+          setTimeout(() => {
+            popToastInfo(resourceToStr(this.context, $r('app.string.LOGGED_IN')))
 
-          popToastInfo(resourceToStr(this.context, $r('app.string.LOGGED_IN')))
-
-          router.pushUrl({
-            url: 'pages/Index'
-          })
+            router.replaceUrl({
+              url: 'pages/Index'
+            })
+          }, 1000)
         } else {
           this.result = ''
           popToastInfo(`Incorrect! You left ${this.maxTry > 0 ? --this.maxTry : this.maxTry = 0} times left to try!`)

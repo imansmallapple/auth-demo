@@ -28,7 +28,6 @@ struct Login {
   private context = getContext(this) as common.UIAbilityContext
   private maxPINLen: number = Constants.MAX_PIN_LENGTH
 
-
   async aboutToAppear(): Promise<void> {
     let savedPIN: string = (await this.localStorage.getValue('pin') as string)
     this.savedPIN = (savedPIN == null ? '' : savedPIN)

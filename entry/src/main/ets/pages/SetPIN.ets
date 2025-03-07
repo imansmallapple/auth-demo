@@ -1,10 +1,5 @@
 import PinCode from '../components/PinCode'
 
-//todo: PIN code with be set when user register an new account
-//todo: It will be invalid when user logout or reset PIN manually
-// When typing PIN only have 3 chance, if failed user can't login using PIN(DONE)
-//todo: One PIN instance only
-
 @Entry
 @Component
 struct SetPIN {
@@ -13,6 +8,7 @@ struct SetPIN {
   @Provide isTypedMax: boolean = false
   @Provide isRegisterPIN: boolean = false
   @Provide isForLogin: boolean = false
+  @Provide isAuthCorrect: boolean = false
   @State title: Resource = $r('app.string.Set_PIN')
 
   aboutToAppear(): void {

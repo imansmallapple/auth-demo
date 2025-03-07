@@ -11,6 +11,8 @@ export default struct PinCode {
   private controller: TextInputController = new TextInputController();
   @Prop enableKeyboardOnFocus: boolean = true
   @Consume textCaretPosition: number
+  @Consume isRegisterPIN: boolean
+  @Consume isAuthCorrect: boolean
   @State inputTextValue: string = ''
   @State viewId: string = ''
   @State safeAreaPadding?: Padding | Length = undefined
@@ -31,6 +33,7 @@ export default struct PinCode {
   @Builder
   KeyboardBuilder() {
     Keyboard()
+      .margin({ bottom:30 })
   }
 
   @Builder
@@ -58,7 +61,6 @@ export default struct PinCode {
           Text(this.getIndexNumber(index))
             .fontSize(20)
         }
-
       }
     }
     .height(50)
@@ -118,6 +120,20 @@ export default struct PinCode {
           })
       }
       .width('100%')
+
+      if (!this.isRegisterPIN && this.isAuthCorrect) {
+        Column() {
+          Row() {
+            Image($r("app.media.icon_verified"))
+              .aspectRatio(1)
+              .objectFit(ImageFit.Contain)
+          }
+          .width(80)
+        }
+        .width('100%')
+        .justifyContent(FlexAlign.Center)
+        .alignItems(HorizontalAlign.Center)
+      }
     }
     .height('100%')
     .width('100%')
